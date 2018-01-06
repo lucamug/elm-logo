@@ -1,6 +1,5 @@
 module Logo exposing (..)
 
-import Color
 import Html
 import Svg
 import Svg.Attributes
@@ -21,23 +20,6 @@ type Color
     | Blue
     | White
     | Black
-
-
-colorToCssRgb : Color.Color -> String
-colorToCssRgb color =
-    let
-        { red, green, blue, alpha } =
-            Color.toRgb color
-    in
-    String.join ""
-        [ "rgb("
-        , String.join ","
-            [ toString red
-            , toString green
-            , toString blue
-            ]
-        , ")"
-        ]
 
 
 cssRgb : Color -> String

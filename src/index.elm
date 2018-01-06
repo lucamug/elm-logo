@@ -48,6 +48,7 @@ main =
                 ]
                 []
             ]
+        , footer [] [ text "made with 凸 by ", a [ href "https://github.com/lucamug" ] [ text "lucamug" ] ]
         ]
 
 
@@ -55,7 +56,7 @@ logoTest : Color.Color -> String -> Html msg
 logoTest color name =
     let
         cssRgb =
-            Logo.colorToCssRgb color
+            colorToCssRgb color
 
         ( textColor, secondaryColor ) =
             if luminance color < 160 then
@@ -115,6 +116,23 @@ logoSeries size =
     ]
 
 
+colorToCssRgb : Color.Color -> String
+colorToCssRgb color =
+    let
+        { red, green, blue, alpha } =
+            Color.toRgb color
+    in
+    String.join ""
+        [ "rgb("
+        , String.join ","
+            [ toString red
+            , toString green
+            , toString blue
+            ]
+        , ")"
+        ]
+
+
 css : String
 css =
     """
@@ -133,6 +151,12 @@ h1, h2 {
     font-weight: normal;
     padding-left: 60px;
     margin: 0;
+}
+footer {
+    padding: 60px;
+}
+a {
+    color: #bbb;
 }
 h1 {
     padding-top: 80px;
