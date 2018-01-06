@@ -1,5 +1,6 @@
 module Logo exposing (..)
 
+import Color
 import Html
 import Svg
 import Svg.Attributes
@@ -8,9 +9,13 @@ import Svg.Attributes
 -- Original from https://github.com/elm-lang/svg/blob/master/examples/Logo.elm
 
 
-type LogoColor
-    = Colored
-    | Orange
+type Type
+    = Monochrome Color
+    | Colored
+
+
+type Color
+    = Orange
     | Green
     | LightBlue
     | Blue
@@ -18,27 +23,47 @@ type LogoColor
     | Black
 
 
-color : LogoColor -> String
-color color =
+colorToCssRgb : Color.Color -> String
+colorToCssRgb color =
+    let
+        { red, green, blue, alpha } =
+            Color.toRgb color
+    in
+    String.join ""
+        [ "rgb("
+        , String.join ","
+            [ toString red
+            , toString green
+            , toString blue
+            ]
+        , ")"
+        ]
+
+
+cssRgb : Color -> String
+cssRgb color =
     case color of
         Orange ->
-            "#F0AD00"
+            "#f0ad00"
 
         Green ->
-            "#7FD13B"
+            "#7fd13b"
 
         LightBlue ->
-            "#60B5CC"
+            "#60b5cc"
 
         Blue ->
-            "#5A6378"
+            "#5a6378"
 
-        _ ->
-            "black"
+        White ->
+            "#fafafa"
+
+        Black ->
+            "#151515"
 
 
-elm : LogoColor -> String -> String -> Html.Html msg
-elm colorName x y =
+elm : Type -> String -> Html.Html msg
+elm logoColor size =
     let
         f =
             Svg.Attributes.fill
@@ -49,46 +74,27 @@ elm colorName x y =
         p =
             Svg.path
 
-        orange =
-            color Orange
-
-        green =
-            color Green
-
-        lightBlue =
-            color LightBlue
-
-        blue =
-            color Blue
-
         c =
-            case colorName of
+            case logoColor of
                 Colored ->
-                    { c1 = orange, c2 = green, c3 = lightBlue, c4 = blue }
+                    { c1 = cssRgb Orange
+                    , c2 = cssRgb Green
+                    , c3 = cssRgb LightBlue
+                    , c4 = cssRgb Blue
+                    }
 
-                Orange ->
-                    { c1 = orange, c2 = orange, c3 = orange, c4 = orange }
-
-                Green ->
-                    { c1 = green, c2 = green, c3 = green, c4 = green }
-
-                LightBlue ->
-                    { c1 = lightBlue, c2 = lightBlue, c3 = lightBlue, c4 = lightBlue }
-
-                Blue ->
-                    { c1 = blue, c2 = blue, c3 = blue, c4 = blue }
-
-                White ->
-                    { c1 = "white", c2 = "white", c3 = "white", c4 = "white" }
-
-                Black ->
-                    { c1 = "black", c2 = "black", c3 = "black", c4 = "black" }
+                Monochrome c ->
+                    { c1 = cssRgb c
+                    , c2 = cssRgb c
+                    , c3 = cssRgb c
+                    , c4 = cssRgb c
+                    }
     in
     Svg.svg
         [ Svg.Attributes.version "1"
         , Svg.Attributes.viewBox "0 0 323 323"
-        , Svg.Attributes.width x
-        , Svg.Attributes.height y
+        , Svg.Attributes.width size
+        , Svg.Attributes.height size
         ]
         [ p [ f c.c1, d "M162 153l70-70H92zm94 94l67 67V179z" ] []
         , p [ f c.c2, d "M9 0l70 70h153L162 0zm238 85l77 76-77 77-76-77z" ] []

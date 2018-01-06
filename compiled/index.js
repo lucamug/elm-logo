@@ -8652,50 +8652,90 @@ var _elm_lang$svg$Svg_Attributes$accumulate = _elm_lang$virtual_dom$VirtualDom$a
 var _elm_lang$svg$Svg_Attributes$accelerate = _elm_lang$virtual_dom$VirtualDom$attribute('accelerate');
 var _elm_lang$svg$Svg_Attributes$accentHeight = _elm_lang$virtual_dom$VirtualDom$attribute('accent-height');
 
-var _lucamug$elm_autocomplete_wrapper$Logo$color = function (color) {
+var _lucamug$elm_logo$Logo$cssRgb = function (color) {
 	var _p0 = color;
 	switch (_p0.ctor) {
 		case 'Orange':
-			return '#F0AD00';
+			return '#f0ad00';
 		case 'Green':
-			return '#7FD13B';
+			return '#7fd13b';
 		case 'LightBlue':
-			return '#60B5CC';
+			return '#60b5cc';
 		case 'Blue':
-			return '#5A6378';
+			return '#5a6378';
+		case 'White':
+			return '#fafafa';
 		default:
-			return 'black';
+			return '#151515';
 	}
 };
-var _lucamug$elm_autocomplete_wrapper$Logo$Black = {ctor: 'Black'};
-var _lucamug$elm_autocomplete_wrapper$Logo$White = {ctor: 'White'};
-var _lucamug$elm_autocomplete_wrapper$Logo$Blue = {ctor: 'Blue'};
-var _lucamug$elm_autocomplete_wrapper$Logo$LightBlue = {ctor: 'LightBlue'};
-var _lucamug$elm_autocomplete_wrapper$Logo$Green = {ctor: 'Green'};
-var _lucamug$elm_autocomplete_wrapper$Logo$Orange = {ctor: 'Orange'};
-var _lucamug$elm_autocomplete_wrapper$Logo$elm = F3(
-	function (colorName, x, y) {
-		var blue = _lucamug$elm_autocomplete_wrapper$Logo$color(_lucamug$elm_autocomplete_wrapper$Logo$Blue);
-		var lightBlue = _lucamug$elm_autocomplete_wrapper$Logo$color(_lucamug$elm_autocomplete_wrapper$Logo$LightBlue);
-		var green = _lucamug$elm_autocomplete_wrapper$Logo$color(_lucamug$elm_autocomplete_wrapper$Logo$Green);
-		var orange = _lucamug$elm_autocomplete_wrapper$Logo$color(_lucamug$elm_autocomplete_wrapper$Logo$Orange);
+var _lucamug$elm_logo$Logo$colorToCssRgb = function (color) {
+	var _p1 = _elm_lang$core$Color$toRgb(color);
+	var red = _p1.red;
+	var green = _p1.green;
+	var blue = _p1.blue;
+	var alpha = _p1.alpha;
+	return A2(
+		_elm_lang$core$String$join,
+		'',
+		{
+			ctor: '::',
+			_0: 'rgb(',
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$core$String$join,
+					',',
+					{
+						ctor: '::',
+						_0: _elm_lang$core$Basics$toString(red),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$core$Basics$toString(green),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$core$Basics$toString(blue),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: ')',
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _lucamug$elm_logo$Logo$Colored = {ctor: 'Colored'};
+var _lucamug$elm_logo$Logo$Monochrome = function (a) {
+	return {ctor: 'Monochrome', _0: a};
+};
+var _lucamug$elm_logo$Logo$Black = {ctor: 'Black'};
+var _lucamug$elm_logo$Logo$White = {ctor: 'White'};
+var _lucamug$elm_logo$Logo$Blue = {ctor: 'Blue'};
+var _lucamug$elm_logo$Logo$LightBlue = {ctor: 'LightBlue'};
+var _lucamug$elm_logo$Logo$Green = {ctor: 'Green'};
+var _lucamug$elm_logo$Logo$Orange = {ctor: 'Orange'};
+var _lucamug$elm_logo$Logo$elm = F2(
+	function (logoColor, size) {
 		var c = function () {
-			var _p1 = colorName;
-			switch (_p1.ctor) {
-				case 'Colored':
-					return {c1: orange, c2: green, c3: lightBlue, c4: blue};
-				case 'Orange':
-					return {c1: orange, c2: orange, c3: orange, c4: orange};
-				case 'Green':
-					return {c1: green, c2: green, c3: green, c4: green};
-				case 'LightBlue':
-					return {c1: lightBlue, c2: lightBlue, c3: lightBlue, c4: lightBlue};
-				case 'Blue':
-					return {c1: blue, c2: blue, c3: blue, c4: blue};
-				case 'White':
-					return {c1: 'white', c2: 'white', c3: 'white', c4: 'white'};
-				default:
-					return {c1: 'black', c2: 'black', c3: 'black', c4: 'black'};
+			var _p2 = logoColor;
+			if (_p2.ctor === 'Colored') {
+				return {
+					c1: _lucamug$elm_logo$Logo$cssRgb(_lucamug$elm_logo$Logo$Orange),
+					c2: _lucamug$elm_logo$Logo$cssRgb(_lucamug$elm_logo$Logo$Green),
+					c3: _lucamug$elm_logo$Logo$cssRgb(_lucamug$elm_logo$Logo$LightBlue),
+					c4: _lucamug$elm_logo$Logo$cssRgb(_lucamug$elm_logo$Logo$Blue)
+				};
+			} else {
+				var _p3 = _p2._0;
+				return {
+					c1: _lucamug$elm_logo$Logo$cssRgb(_p3),
+					c2: _lucamug$elm_logo$Logo$cssRgb(_p3),
+					c3: _lucamug$elm_logo$Logo$cssRgb(_p3),
+					c4: _lucamug$elm_logo$Logo$cssRgb(_p3)
+				};
 			}
 		}();
 		var p = _elm_lang$svg$Svg$path;
@@ -8711,10 +8751,10 @@ var _lucamug$elm_autocomplete_wrapper$Logo$elm = F3(
 					_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 323 323'),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$svg$Svg_Attributes$width(x),
+						_0: _elm_lang$svg$Svg_Attributes$width(size),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$svg$Svg_Attributes$height(y),
+							_0: _elm_lang$svg$Svg_Attributes$height(size),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -8782,61 +8822,48 @@ var _lucamug$elm_autocomplete_wrapper$Logo$elm = F3(
 				}
 			});
 	});
-var _lucamug$elm_autocomplete_wrapper$Logo$Colored = {ctor: 'Colored'};
 
-var _lucamug$elm_autocomplete_wrapper$Main$css = '\nbody {\n    background-color: #eee;\n    font-family: sans-serif;\n    color: #999;\n    padding: 40px;\n    margin: 0;\n}\nh2 {\n    padding-top: 40px;\n    padding-bottom: 20px;\n    font-weight: normal;\n}\n';
-var _lucamug$elm_autocomplete_wrapper$Main$colorToString = function (color) {
-	var c = _elm_lang$core$Color$toRgb(color);
-	return A2(
-		_elm_lang$core$Basics_ops['++'],
-		'rgb(',
-		A2(
-			_elm_lang$core$Basics_ops['++'],
-			A2(
-				_elm_lang$core$String$join,
-				',',
-				A2(
-					_elm_lang$core$List$map,
-					function (item) {
-						return _elm_lang$core$Basics$toString(item);
-					},
-					{
-						ctor: '::',
-						_0: c.red,
-						_1: {
-							ctor: '::',
-							_0: c.green,
-							_1: {
-								ctor: '::',
-								_0: c.blue,
-								_1: {ctor: '[]'}
-							}
-						}
-					})),
-			')'));
-};
-var _lucamug$elm_autocomplete_wrapper$Main$logoSeries = function (s) {
+var _lucamug$elm_logo$Main$css = '\n@import url(\'https://fonts.googleapis.com/css?family=Source+Sans+Pro\');\nbody {\n    background-color: white;\n    font-family: \'Source Sans Pro\', sans-serif;\n    color: #bbb;\n    padding: 0;\n    margin: 0;\n}\n.important {\n    color: black;\n}\nh1, h2 {\n    font-weight: normal;\n    padding-left: 60px;\n    margin: 0;\n}\nh1 {\n    padding-top: 80px;\n    font-size: 60px;\n}\nh2 {\n    padding-top: 80px;\n    padding-bottom: 20px;\n}\n.logoContainer {\n    padding-bottom: 40px;\n}\n.svgsContainer {\n    padding: 0 30px 0 30px;\n}\n.svgContainer {\n    padding: 30px;\n    display: inline-block;\n}\n';
+var _lucamug$elm_logo$Main$logoSeries = function (size) {
 	return {
 		ctor: '::',
-		_0: A3(_lucamug$elm_autocomplete_wrapper$Logo$elm, _lucamug$elm_autocomplete_wrapper$Logo$Colored, s, s),
+		_0: A2(_lucamug$elm_logo$Logo$elm, _lucamug$elm_logo$Logo$Colored, size),
 		_1: {
 			ctor: '::',
-			_0: A3(_lucamug$elm_autocomplete_wrapper$Logo$elm, _lucamug$elm_autocomplete_wrapper$Logo$Orange, s, s),
+			_0: A2(
+				_lucamug$elm_logo$Logo$elm,
+				_lucamug$elm_logo$Logo$Monochrome(_lucamug$elm_logo$Logo$Orange),
+				size),
 			_1: {
 				ctor: '::',
-				_0: A3(_lucamug$elm_autocomplete_wrapper$Logo$elm, _lucamug$elm_autocomplete_wrapper$Logo$Green, s, s),
+				_0: A2(
+					_lucamug$elm_logo$Logo$elm,
+					_lucamug$elm_logo$Logo$Monochrome(_lucamug$elm_logo$Logo$Green),
+					size),
 				_1: {
 					ctor: '::',
-					_0: A3(_lucamug$elm_autocomplete_wrapper$Logo$elm, _lucamug$elm_autocomplete_wrapper$Logo$LightBlue, s, s),
+					_0: A2(
+						_lucamug$elm_logo$Logo$elm,
+						_lucamug$elm_logo$Logo$Monochrome(_lucamug$elm_logo$Logo$LightBlue),
+						size),
 					_1: {
 						ctor: '::',
-						_0: A3(_lucamug$elm_autocomplete_wrapper$Logo$elm, _lucamug$elm_autocomplete_wrapper$Logo$Blue, s, s),
+						_0: A2(
+							_lucamug$elm_logo$Logo$elm,
+							_lucamug$elm_logo$Logo$Monochrome(_lucamug$elm_logo$Logo$Blue),
+							size),
 						_1: {
 							ctor: '::',
-							_0: A3(_lucamug$elm_autocomplete_wrapper$Logo$elm, _lucamug$elm_autocomplete_wrapper$Logo$White, s, s),
+							_0: A2(
+								_lucamug$elm_logo$Logo$elm,
+								_lucamug$elm_logo$Logo$Monochrome(_lucamug$elm_logo$Logo$White),
+								size),
 							_1: {
 								ctor: '::',
-								_0: A3(_lucamug$elm_autocomplete_wrapper$Logo$elm, _lucamug$elm_autocomplete_wrapper$Logo$Black, s, s),
+								_0: A2(
+									_lucamug$elm_logo$Logo$elm,
+									_lucamug$elm_logo$Logo$Monochrome(_lucamug$elm_logo$Logo$Black),
+									size),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -8846,167 +8873,309 @@ var _lucamug$elm_autocomplete_wrapper$Main$logoSeries = function (s) {
 		}
 	};
 };
-var _lucamug$elm_autocomplete_wrapper$Main$logoTest = F2(
+var _lucamug$elm_logo$Main$luminance = function (color) {
+	var _p0 = _elm_lang$core$Color$toRgb(color);
+	var red = _p0.red;
+	var green = _p0.green;
+	var blue = _p0.blue;
+	var alpha = _p0.alpha;
+	return ((0.299 * _elm_lang$core$Basics$toFloat(red)) + (0.587 * _elm_lang$core$Basics$toFloat(green))) + (0.114 * _elm_lang$core$Basics$toFloat(blue));
+};
+var _lucamug$elm_logo$Main$logoTest = F2(
 	function (color, name) {
+		var _p1 = (_elm_lang$core$Native_Utils.cmp(
+			_lucamug$elm_logo$Main$luminance(color),
+			160) < 0) ? {ctor: '_Tuple2', _0: '#eee', _1: '#bbb'} : {ctor: '_Tuple2', _0: '#333', _1: '#777'};
+		var textColor = _p1._0;
+		var secondaryColor = _p1._1;
+		var cssRgb = _lucamug$elm_logo$Logo$colorToCssRgb(color);
 		return A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
 			{
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$h2,
-					{ctor: '[]'},
+					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text(name),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
+						_0: _elm_lang$html$Html_Attributes$class('logoContainer'),
+						_1: {
 							ctor: '::',
 							_0: _elm_lang$html$Html_Attributes$style(
 								{
 									ctor: '::',
-									_0: {
-										ctor: '_Tuple2',
-										_0: 'background-color',
-										_1: _lucamug$elm_autocomplete_wrapper$Main$colorToString(color)
-									},
+									_0: {ctor: '_Tuple2', _0: 'background-color', _1: cssRgb},
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A3(
-								_elm_lang$html$Html$node,
-								'style',
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text(_lucamug$elm_autocomplete_wrapper$Main$css),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
+						}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h2,
+							{
 								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{ctor: '[]'},
-									A2(
-										_elm_lang$core$List$map,
-										function (item) {
-											return A2(
-												_elm_lang$html$Html$div,
+								_0: _elm_lang$html$Html_Attributes$style(
+									{
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'color', _1: textColor},
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(
+									A2(_elm_lang$core$Basics_ops['++'], 'on ', name)),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$span,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$style(
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$style(
-														{
+													_0: {ctor: '_Tuple2', _0: 'color', _1: secondaryColor},
+													_1: {
+														ctor: '::',
+														_0: {ctor: '_Tuple2', _0: 'font-size', _1: '16px'},
+														_1: {
 															ctor: '::',
-															_0: {ctor: '_Tuple2', _0: 'padding', _1: '50px'},
+															_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
 															_1: {
 																ctor: '::',
-																_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
+																_0: {ctor: '_Tuple2', _0: 'padding-left', _1: '40px'},
 																_1: {ctor: '[]'}
 															}
-														}),
-													_1: {ctor: '[]'}
-												},
-												{
-													ctor: '::',
-													_0: item,
-													_1: {ctor: '[]'}
-												});
+														}
+													}
+												}),
+											_1: {ctor: '[]'}
 										},
-										_lucamug$elm_autocomplete_wrapper$Main$logoSeries('100'))),
-								_1: {ctor: '[]'}
-							}
-						}),
-					_1: {ctor: '[]'}
-				}
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(
+												A2(_elm_lang$core$Basics_ops['++'], ' ', cssRgb)),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(' luminance '),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html$text(
+														_elm_lang$core$Basics$toString(
+															_elm_lang$core$Basics$floor(
+																_lucamug$elm_logo$Main$luminance(color)))),
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('svgsContainer'),
+									_1: {ctor: '[]'}
+								},
+								A2(
+									_elm_lang$core$List$map,
+									function (item) {
+										return A2(
+											_elm_lang$html$Html$div,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('svgContainer'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: item,
+												_1: {ctor: '[]'}
+											});
+									},
+									_lucamug$elm_logo$Main$logoSeries('100'))),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
 			});
 	});
-var _lucamug$elm_autocomplete_wrapper$Main$main = _elm_lang$virtual_dom$Native_VirtualDom.staticProgram(
+var _lucamug$elm_logo$Main$main = _elm_lang$virtual_dom$Native_VirtualDom.staticProgram(
 	A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$h1,
+			_0: A3(
+				_elm_lang$html$Html$node,
+				'style',
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('Elm logo'),
+					_0: _elm_lang$html$Html$text(_lucamug$elm_logo$Main$css),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
 				ctor: '::',
-				_0: A2(_lucamug$elm_autocomplete_wrapper$Main$logoTest, _elm_lang$core$Color$white, 'white'),
-				_1: {
-					ctor: '::',
-					_0: A2(_lucamug$elm_autocomplete_wrapper$Main$logoTest, _elm_lang$core$Color$lightGray, 'light gray'),
-					_1: {
+				_0: A2(
+					_elm_lang$html$Html$h1,
+					{ctor: '[]'},
+					{
 						ctor: '::',
-						_0: A2(_lucamug$elm_autocomplete_wrapper$Main$logoTest, _elm_lang$core$Color$gray, 'gray'),
+						_0: _elm_lang$html$Html$text('elm '),
 						_1: {
 							ctor: '::',
-							_0: A2(_lucamug$elm_autocomplete_wrapper$Main$logoTest, _elm_lang$core$Color$darkGray, 'dark gray'),
+							_0: A2(
+								_elm_lang$html$Html$span,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('important'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('logo'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$white, 'white'),
+					_1: {
+						ctor: '::',
+						_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$lightGray, 'light gray'),
+						_1: {
+							ctor: '::',
+							_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$gray, 'gray'),
 							_1: {
 								ctor: '::',
-								_0: A2(_lucamug$elm_autocomplete_wrapper$Main$logoTest, _elm_lang$core$Color$darkCharcoal, 'charcoal'),
+								_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$darkGray, 'dark gray'),
 								_1: {
 									ctor: '::',
-									_0: A2(_lucamug$elm_autocomplete_wrapper$Main$logoTest, _elm_lang$core$Color$lightYellow, 'light yellow'),
+									_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$lightCharcoal, 'light charcoal'),
 									_1: {
 										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$a,
-											{
+										_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$charcoal, 'charcoal'),
+										_1: {
+											ctor: '::',
+											_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$darkCharcoal, 'dark charcoal'),
+											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$href('https://github.com/lucamug/elm-logo'),
-												_1: {ctor: '[]'}
-											},
-											{
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$img,
-													{
+												_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$black, 'black'),
+												_1: {
+													ctor: '::',
+													_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$lightYellow, 'light yellow'),
+													_1: {
 														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$style(
-															{
+														_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$lightOrange, 'light orange'),
+														_1: {
+															ctor: '::',
+															_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$lightGreen, 'light green'),
+															_1: {
 																ctor: '::',
-																_0: {ctor: '_Tuple2', _0: 'position', _1: 'absolute'},
+																_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$lightRed, 'light red'),
 																_1: {
 																	ctor: '::',
-																	_0: {ctor: '_Tuple2', _0: 'top', _1: '0'},
+																	_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$lightBlue, 'light blue'),
 																	_1: {
 																		ctor: '::',
-																		_0: {ctor: '_Tuple2', _0: 'right', _1: '0'},
+																		_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$lightPurple, 'light purple'),
 																		_1: {
 																			ctor: '::',
-																			_0: {ctor: '_Tuple2', _0: 'border', _1: '0'},
-																			_1: {ctor: '[]'}
+																			_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$lightBrown, 'light brown'),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$darkYellow, 'dark yellow'),
+																				_1: {
+																					ctor: '::',
+																					_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$darkOrange, 'dark orange'),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$darkGreen, 'dark green'),
+																						_1: {
+																							ctor: '::',
+																							_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$darkRed, 'dark red'),
+																							_1: {
+																								ctor: '::',
+																								_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$darkBlue, 'dark blue'),
+																								_1: {
+																									ctor: '::',
+																									_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$darkPurple, 'dark purple'),
+																									_1: {
+																										ctor: '::',
+																										_0: A2(_lucamug$elm_logo$Main$logoTest, _elm_lang$core$Color$darkBrown, 'dark brown'),
+																										_1: {
+																											ctor: '::',
+																											_0: A2(
+																												_elm_lang$html$Html$a,
+																												{
+																													ctor: '::',
+																													_0: _elm_lang$html$Html_Attributes$href('https://github.com/lucamug/elm-logo'),
+																													_1: {ctor: '[]'}
+																												},
+																												{
+																													ctor: '::',
+																													_0: A2(
+																														_elm_lang$html$Html$img,
+																														{
+																															ctor: '::',
+																															_0: _elm_lang$html$Html_Attributes$style(
+																																{
+																																	ctor: '::',
+																																	_0: {ctor: '_Tuple2', _0: 'position', _1: 'absolute'},
+																																	_1: {
+																																		ctor: '::',
+																																		_0: {ctor: '_Tuple2', _0: 'top', _1: '0'},
+																																		_1: {
+																																			ctor: '::',
+																																			_0: {ctor: '_Tuple2', _0: 'right', _1: '0'},
+																																			_1: {
+																																				ctor: '::',
+																																				_0: {ctor: '_Tuple2', _0: 'border', _1: '0'},
+																																				_1: {ctor: '[]'}
+																																			}
+																																		}
+																																	}
+																																}),
+																															_1: {
+																																ctor: '::',
+																																_0: _elm_lang$html$Html_Attributes$src('https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67'),
+																																_1: {
+																																	ctor: '::',
+																																	_0: _elm_lang$html$Html_Attributes$alt('Fork me on GitHub'),
+																																	_1: {ctor: '[]'}
+																																}
+																															}
+																														},
+																														{ctor: '[]'}),
+																													_1: {ctor: '[]'}
+																												}),
+																											_1: {ctor: '[]'}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
 																		}
 																	}
 																}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$src('https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67'),
-															_1: {
-																ctor: '::',
-																_0: _elm_lang$html$Html_Attributes$alt('Fork me on GitHub'),
-																_1: {ctor: '[]'}
 															}
 														}
-													},
-													{ctor: '[]'}),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
 									}
 								}
 							}
@@ -9018,8 +9187,8 @@ var _lucamug$elm_autocomplete_wrapper$Main$main = _elm_lang$virtual_dom$Native_V
 
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};
-if (typeof _lucamug$elm_autocomplete_wrapper$Main$main !== 'undefined') {
-    _lucamug$elm_autocomplete_wrapper$Main$main(Elm['Main'], 'Main', undefined);
+if (typeof _lucamug$elm_logo$Main$main !== 'undefined') {
+    _lucamug$elm_logo$Main$main(Elm['Main'], 'Main', undefined);
 }
 
 if (typeof define === "function" && define['amd'])
