@@ -48,7 +48,7 @@ main =
                 ]
                 []
             ]
-        , footer [] [ text "made with 凸 by ", a [ href "https://github.com/lucamug" ] [ text "lucamug" ] ]
+        , lucamug
         ]
 
 
@@ -152,7 +152,7 @@ h1, h2 {
     padding-left: 60px;
     margin: 0;
 }
-footer {
+.lucamug {
     padding: 60px;
 }
 a {
@@ -177,3 +177,17 @@ h2 {
     display: inline-block;
 }
 """
+
+
+
+-- MADE BY LUCAMUG
+
+
+lucamug : Html msg
+lucamug =
+    a [ class "lucamug", href "https://github.com/lucamug" ]
+        [ node "style" [] [ text """.lucamug{opacity:.4;color:#000;display:block;text-decoration:none}.lucamug:hover{opacity:.5}.lucamug:hover .lucamugSpin{transform:rotate(360deg)}.lucamugSpin{color:#3d8a9f ;display:inline-block;transition:transform .6s ease-in-out}""" ]
+        , text "made with "
+        , span [ class "lucamugSpin" ] [ text "凸" ]
+        , text " by lucamug"
+        ]
