@@ -1,7 +1,7 @@
 module Main exposing (..)
 
---import LogoCocacola as Logo
---import LogoCocacolaIntrospection as LogoIntrospection
+-- import LogoCocacola as Logo
+-- import LogoCocacolaIntrospection as LogoIntrospection
 
 import Color
 import Html exposing (..)
@@ -118,22 +118,25 @@ view model =
                 (List.map
                     (\logoSize ->
                         let
-                            size =
-                                toString logoSize ++ "px"
+                            height =
+                                toString logoSize
+
+                            width =
+                                toString <| floor <| toFloat logoSize * Logo.ratio
                         in
                         div
                             [ class "clickable"
                             , style
                                 [ ( "display", "inline-block" )
-                                , ( "width", size )
-                                , ( "height", size )
+                                , ( "height", height ++ "px" )
+                                , ( "width", width ++ "px" )
                                 , ( "border", "1px solid #ddd" )
                                 , ( "text-align", "center" )
                                 ]
                             , onClick (SelectLogoSize logoSize)
                             ]
                             [ --text <| convertLogoTypeToString logoType
-                              text <| toString logoSize
+                              text <| width ++ " x " ++ height
                             ]
                     )
                     logoSizes
@@ -191,9 +194,6 @@ logoSizes =
     , 48
     , 64
     , 80
-    , 96
-    , 112
-    , 128
     ]
 
 

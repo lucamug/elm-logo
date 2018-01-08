@@ -8767,53 +8767,23 @@ var _elm_lang$svg$Svg_Attributes$accumulate = _elm_lang$virtual_dom$VirtualDom$a
 var _elm_lang$svg$Svg_Attributes$accelerate = _elm_lang$virtual_dom$VirtualDom$attribute('accelerate');
 var _elm_lang$svg$Svg_Attributes$accentHeight = _elm_lang$virtual_dom$VirtualDom$attribute('accent-height');
 
-var _lucamug$elm_logo$LogoElm$cssRgb = function (color) {
+var _lucamug$elm_logo$LogoCocacola$ratio = 202 / 67.5;
+var _lucamug$elm_logo$LogoCocacola$cssRgb = function (color) {
 	var _p0 = color;
 	switch (_p0.ctor) {
-		case 'Orange':
-			return '#f0ad00';
-		case 'Green':
-			return '#7fd13b';
-		case 'LightBlue':
-			return '#60b5cc';
-		case 'Blue':
-			return '#5a6378';
+		case 'Red':
+			return '#f40009';
 		case 'White':
 			return '#fff';
 		default:
 			return '#000';
 	}
 };
-var _lucamug$elm_logo$LogoElm$Colorful = {ctor: 'Colorful'};
-var _lucamug$elm_logo$LogoElm$Color = function (a) {
-	return {ctor: 'Color', _0: a};
-};
-var _lucamug$elm_logo$LogoElm$Black = {ctor: 'Black'};
-var _lucamug$elm_logo$LogoElm$White = {ctor: 'White'};
-var _lucamug$elm_logo$LogoElm$Blue = {ctor: 'Blue'};
-var _lucamug$elm_logo$LogoElm$LightBlue = {ctor: 'LightBlue'};
-var _lucamug$elm_logo$LogoElm$Green = {ctor: 'Green'};
-var _lucamug$elm_logo$LogoElm$Orange = {ctor: 'Orange'};
-var _lucamug$elm_logo$LogoElm$logo = F2(
-	function (type_, size) {
+var _lucamug$elm_logo$LogoCocacola$logo = F2(
+	function (type_, height) {
 		var c = function () {
 			var _p1 = type_;
-			if (_p1.ctor === 'Colorful') {
-				return {
-					c1: _lucamug$elm_logo$LogoElm$cssRgb(_lucamug$elm_logo$LogoElm$Orange),
-					c2: _lucamug$elm_logo$LogoElm$cssRgb(_lucamug$elm_logo$LogoElm$Green),
-					c3: _lucamug$elm_logo$LogoElm$cssRgb(_lucamug$elm_logo$LogoElm$LightBlue),
-					c4: _lucamug$elm_logo$LogoElm$cssRgb(_lucamug$elm_logo$LogoElm$Blue)
-				};
-			} else {
-				var _p2 = _p1._0;
-				return {
-					c1: _lucamug$elm_logo$LogoElm$cssRgb(_p2),
-					c2: _lucamug$elm_logo$LogoElm$cssRgb(_p2),
-					c3: _lucamug$elm_logo$LogoElm$cssRgb(_p2),
-					c4: _lucamug$elm_logo$LogoElm$cssRgb(_p2)
-				};
-			}
+			return _lucamug$elm_logo$LogoCocacola$cssRgb(_p1._0);
 		}();
 		var p = _elm_lang$svg$Svg$path;
 		var d = _elm_lang$svg$Svg_Attributes$d;
@@ -8825,15 +8795,17 @@ var _lucamug$elm_logo$LogoElm$logo = F2(
 				_0: _elm_lang$svg$Svg_Attributes$version('1'),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 323 323'),
+					_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 202 67.5'),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$svg$Svg_Attributes$width(
-							_elm_lang$core$Basics$toString(size)),
+						_0: _elm_lang$svg$Svg_Attributes$height(
+							_elm_lang$core$Basics$toString(height)),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$svg$Svg_Attributes$height(
-								_elm_lang$core$Basics$toString(size)),
+							_0: _elm_lang$svg$Svg_Attributes$width(
+								_elm_lang$core$Basics$toString(
+									_elm_lang$core$Basics$floor(
+										_elm_lang$core$Basics$toFloat(height) * _lucamug$elm_logo$LogoCocacola$ratio))),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -8845,118 +8817,66 @@ var _lucamug$elm_logo$LogoElm$logo = F2(
 					p,
 					{
 						ctor: '::',
-						_0: f(c.c1),
+						_0: f(c),
 						_1: {
 							ctor: '::',
-							_0: d('M162 153l70-70H92zm94 94l67 67V179z'),
+							_0: d('M168.1 56.8l-.6.6c-.9.8-1.8 1.6-2.9 1.2-.3-.1-.5-.5-.5-.8 0-2.3 1-4.4 2-6.4l.2-.5c2.8-4.8 6-10.3 10.9-14.2.8-.6 1.7-1 2.6-.7.2.2.5.6.5 1l-.2.4-3.8 6.7c-2.5 4.3-5 8.8-8.2 12.7zm-26.1-11c-.2 0-3.5-1-4.1-4-.5-2.7 1.3-4.7 3-5.7a3 3 0 0 1 2.7-.5c.7.5 1 1.4 1 2.4l-.2 1.8v.1c-.6 2-1.4 4-2.4 5.8zM129.5 58a3 3 0 0 1-.4-1.6c-.1-3.6 3.8-10 6.5-13.5 1.1 2.5 3.7 4 5.3 4.7-2 4.4-8.6 13.6-11.4 10.4zm47 .6c-.6.5-1.5.1-1.1-.9.8-2.5 4.2-7.8 4.2-7.8l9.3-16.5h-6.4l-1 1.6a8.8 8.8 0 0 0-1.5-1.8c-1.6-1-3.9-.5-5.4.3-7 4-12 12-16 18.2 0 0-4 7-6.4 7.4-1.8.2-1.6-2.2-1.5-2.8.7-4.1 2.3-8 4-11.5A105.8 105.8 0 0 0 180 19c-.1 0-1.1.2-2.3.2-5.7 8-17.5 19.7-21 21.4 1.5-3.8 11.7-22 20.4-30.6l1.4-1.4c2.1-2 4.3-4.1 6-4.5.2 0 .4 0 .6.4.1 1.6-.5 2.8-1.2 4.2l-1 2 2.3-.6c1-2 2.2-4.1 1.8-6.8a2 2 0 0 0-1.6-1.6c-2.6-.5-5.4 1.4-7.7 3a110.1 110.1 0 0 0-30.3 40.5c-.6.4-3 1-3.4.7.8-1.7 1.9-4 2.4-6.6l.2-2.3c0-1.5-.4-3-1.8-4-1.6-.9-3.7-.5-5 .1-6.2 2.6-10.8 9-14.2 14.2a31 31 0 0 0-4 10.9c-.4 3.2.3 5.2 2.1 6.2 1.9 1 4.2 0 5.1-.5A39.1 39.1 0 0 0 143 48c.2 0 2 0 3.5-.4l-.8 2.5c-2.2 6.4-3.2 10.8-1.1 13.4 3 3.6 7.8-.2 11.8-5.1-.9 6 2.2 6.9 4.6 6.4 2.7-.7 5.7-3.6 7-5.1-.4 1.7-.2 4.9 2.2 5.2 1.7.3 3-.6 4.4-1.4a50.4 50.4 0 0 0 13.2-15.1h-2.2c-2.3 3.5-5.2 8-9 10.2zM95.9 23.1h6l3.4-5.5h-6zm95.9-14.6a24.4 24.4 0 0 1-15.1 3.7 88 88 0 0 0-4.6 5.5c8 2 16.6-2.5 21.4-6.8 5-4.4 7.6-9.9 7.6-9.9s-3.8 4.3-9.3 7.5zM141.2 7c-1 11-9.5 17.4-11.6 17.9-1.2.2-3.4-.3-1.5-5a30.5 30.5 0 0 1 13-14l.1 1.1zm-16.6 27.6c-.6-1.3-2-2.2-3.6-2-5 .4-9.9 4.5-12.4 10.4-1.4 3-2.1 5.5-2.6 9.5 1.5-1.8 4.7-4.7 8.3-6.3 0 0 .5-3.8 3-7.3 1-1.4 2.9-3.6 5-3 1.8.6 1.2 5.7-1.3 10.7a34.5 34.5 0 0 1-7.4 9.9c-2.5 2-6.2 4.6-9.5 2.7-2-1.2-3-3.8-2.8-7 1-9.3 5.2-17.1 11.2-26.1 6.2-8.3 13-16.9 22.2-21.4 2-1 3.7-1.2 5.2-.6 0 0-8.7 4.8-12.8 13.6-1 2.2-2.5 5.2-1 7.9.7 1.4 2 1.5 3.2 1.4 5-1.2 8.3-5.9 11-10.2A23.8 23.8 0 0 0 143 5.3c2.4-1.3 7.4 1 7.4 1 3.9 1.2 12.1 7.6 14.9 8.8 1.3-1.6 3.6-4 4.8-5.2l-1.8-1.1c-2.9-1.8-6-3.5-9-5.1A18 18 0 0 0 144 2.3l-2.2.7c-2-2.3-5.5-2-8-1.4-9.3 2.6-17.8 9-27 20.2a73.8 73.8 0 0 0-13 23.7c-1.7 5-2.3 12.4 2 16.7 3.5 3.7 8.2 3 11.5 1.6a36.7 36.7 0 0 0 17-20c.7-2.6 1.6-6.3.2-9.1zm-79.9-8.5L43.5 29h-1.3c-1.7-.6-3-1.8-3.4-3.1-.5-2.6 1.7-4.7 2.7-5.5 1-.6 2.4-1 3.3-.3.5.6.7 1.4.7 2.3 0 1.2-.3 2.5-.8 3.8zm-2.6 5.3v.2l-2.8 4.5c-1.7 2.2-3.7 5-6.3 6.3-.8.3-1.8.4-2.4-.2-1.1-1.4-.5-3.3 0-4.9l.1-.5a45.5 45.5 0 0 1 5.8-10.1 9.1 9.1 0 0 0 5.7 4.3v.4zm34.4-3c1.2-1.7 4.8-6.2 5.7-7 3-2.6 4.1-1.4 4.2-.6a578.7 578.7 0 0 1-10 17 14 14 0 0 1-4.9 5c-.3.1-.8.1-1.1-.1-.4-.3-.6-.8-.6-1.2.2-1.6 1.8-6.4 6.7-13zm-30.4-11c-3.8-2.5-11.5 2.3-17.6 10.4-5.6 7.4-8 15.9-5.3 19.8 3.9 4.6 11.1-2.1 14.2-5.7l.4-.4c2-2.3 3.7-5 5.3-7.6l1.5-2.5c.9-.1 2-.4 3.1-.8 0 .1-4.6 7.8-4.1 11.7.1 1.2 0 5.4 4.2 6.7 5.6 1 10-3.3 14-7.2l1-1-.2.9c-1.7 5.7.5 6.9 2 7.3 4 1.2 9-4.8 9-4.8 0 1.9-.4 3.4 1.6 4.7 1.9.7 3.8-.3 5.2-1.3A54 54 0 0 0 93.3 33h-2.2s-5.3 7.8-8.8 9.4c0 0-.7.4-1 .1-.5-.4-.3-1.2 0-1.7l13.4-23.3h-6.3l-.8 1.2-.2-.3C83.5 13 74.6 21.4 68 31a63.5 63.5 0 0 1-9.3 11s-5 4.6-7.2 1.3a6.6 6.6 0 0 1 0-4.8A39.6 39.6 0 0 1 63.1 21c1.3-1 2.8-1.4 3.6-1 .7.5.8 1.6.4 2.3-1.2 0-2 .3-2.8 1-1.5 1.6-2 3-1.5 4.5 2.2 3.2 6.7-3.2 6.5-7 0-1.5-.8-2.8-2-3.4-1.6-1-4-.7-5.7 0-2.2.9-5.6 3.7-7.7 6-2.5 2.8-6.8 5.9-8.2 5.5.4-1.2 4.1-8.7.3-11.5zm31.7 40.7C70.4 53.3 60.3 52.5 44 57c-17.4 4-23.2 6.7-30.8 1.4-2.9-2.5-4-6.7-3.2-12.7a64.4 64.4 0 0 1 15.5-29.5c4.8-5.4 9.3-10 15.3-12 4.5-1.1 4.1 2.5 3.6 3-.6 0-1.6 0-2.4.6-.6.4-2.2 2-2.3 4-.2 3.2 3.1 2.5 4.5.8 1.5-2 3.8-5.7 2-9.2-.7-1.2-2-2.1-3.6-2.4a27 27 0 0 0-15.2 5.2 66.5 66.5 0 0 0-23 27.7C1.5 40.5-.9 49.8 2.7 57.4c2.9 5.3 8.7 8 15.6 7.5 4.9-.5 10.8-2.1 14.7-3 4-1 24.3-8 31 4.1 0 0 2.2-4.3 7.7-4.4a26 26 0 0 1 15.9 4.9c-1.6-2.4-6.1-6-9.9-8.4z'),
 							_1: {ctor: '[]'}
 						}
 					},
 					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						p,
-						{
-							ctor: '::',
-							_0: f(c.c2),
-							_1: {
-								ctor: '::',
-								_0: d('M9 0l70 70h153L162 0zm238 85l77 76-77 77-76-77z'),
-								_1: {ctor: '[]'}
-							}
-						},
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							p,
-							{
-								ctor: '::',
-								_0: f(c.c3),
-								_1: {
-									ctor: '::',
-									_0: d('M323 144V0H180zm-161 27L9 323h305z'),
-									_1: {ctor: '[]'}
-								}
-							},
-							{ctor: '[]'}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								p,
-								{
-									ctor: '::',
-									_0: f(c.c4),
-									_1: {
-										ctor: '::',
-										_0: d('M153 162L0 9v305z'),
-										_1: {ctor: '[]'}
-									}
-								},
-								{ctor: '[]'}),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
+				_1: {ctor: '[]'}
 			});
 	});
+var _lucamug$elm_logo$LogoCocacola$Color = function (a) {
+	return {ctor: 'Color', _0: a};
+};
+var _lucamug$elm_logo$LogoCocacola$Black = {ctor: 'Black'};
+var _lucamug$elm_logo$LogoCocacola$White = {ctor: 'White'};
+var _lucamug$elm_logo$LogoCocacola$Red = {ctor: 'Red'};
 
-var _lucamug$elm_logo$LogoElmIntrospection$convertLogoColorToString = function (colorType) {
-	var _p0 = colorType;
+var _lucamug$elm_logo$LogoCocacolaIntrospection$convertLogoColorToString = function (logoColor) {
+	var _p0 = logoColor;
 	switch (_p0.ctor) {
-		case 'Orange':
-			return 'Orange';
-		case 'Green':
-			return 'Green';
-		case 'LightBlue':
-			return 'LightBlue';
-		case 'Blue':
-			return 'Blue';
-		case 'White':
-			return 'White';
-		default:
+		case 'Red':
+			return 'Red';
+		case 'Black':
 			return 'Black';
+		default:
+			return 'White';
 	}
 };
-var _lucamug$elm_logo$LogoElmIntrospection$convertLogoTypeToString = function (logoType) {
+var _lucamug$elm_logo$LogoCocacolaIntrospection$convertLogoTypeToString = function (logoType) {
 	var _p1 = logoType;
-	if (_p1.ctor === 'Color') {
-		return A2(
-			_elm_lang$core$Basics_ops['++'],
-			'Color ',
-			_lucamug$elm_logo$LogoElmIntrospection$convertLogoColorToString(_p1._0));
-	} else {
-		return 'Colorful';
-	}
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		'Color ',
+		_lucamug$elm_logo$LogoCocacolaIntrospection$convertLogoColorToString(_p1._0));
 };
-var _lucamug$elm_logo$LogoElmIntrospection$logoTypeDefault = _lucamug$elm_logo$LogoElm$Colorful;
-var _lucamug$elm_logo$LogoElmIntrospection$logoTypes = {
+var _lucamug$elm_logo$LogoCocacolaIntrospection$logoColors = {
 	ctor: '::',
-	_0: _lucamug$elm_logo$LogoElm$Colorful,
+	_0: _lucamug$elm_logo$LogoCocacola$Red,
 	_1: {
 		ctor: '::',
-		_0: _lucamug$elm_logo$LogoElm$Color(_lucamug$elm_logo$LogoElm$Orange),
+		_0: _lucamug$elm_logo$LogoCocacola$White,
 		_1: {
 			ctor: '::',
-			_0: _lucamug$elm_logo$LogoElm$Color(_lucamug$elm_logo$LogoElm$Green),
-			_1: {
-				ctor: '::',
-				_0: _lucamug$elm_logo$LogoElm$Color(_lucamug$elm_logo$LogoElm$LightBlue),
-				_1: {
-					ctor: '::',
-					_0: _lucamug$elm_logo$LogoElm$Color(_lucamug$elm_logo$LogoElm$Blue),
-					_1: {
-						ctor: '::',
-						_0: _lucamug$elm_logo$LogoElm$Color(_lucamug$elm_logo$LogoElm$White),
-						_1: {
-							ctor: '::',
-							_0: _lucamug$elm_logo$LogoElm$Color(_lucamug$elm_logo$LogoElm$Black),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			}
+			_0: _lucamug$elm_logo$LogoCocacola$Black,
+			_1: {ctor: '[]'}
+		}
+	}
+};
+var _lucamug$elm_logo$LogoCocacolaIntrospection$logoTypeDefault = _lucamug$elm_logo$LogoCocacola$Color(_lucamug$elm_logo$LogoCocacola$Red);
+var _lucamug$elm_logo$LogoCocacolaIntrospection$logoTypes = {
+	ctor: '::',
+	_0: _lucamug$elm_logo$LogoCocacola$Color(_lucamug$elm_logo$LogoCocacola$Red),
+	_1: {
+		ctor: '::',
+		_0: _lucamug$elm_logo$LogoCocacola$Color(_lucamug$elm_logo$LogoCocacola$White),
+		_1: {
+			ctor: '::',
+			_0: _lucamug$elm_logo$LogoCocacola$Color(_lucamug$elm_logo$LogoCocacola$Black),
+			_1: {ctor: '[]'}
 		}
 	}
 };
@@ -9051,9 +8971,9 @@ var _lucamug$elm_logo$Main$logoSeries = function (size) {
 	return A2(
 		_elm_lang$core$List$map,
 		function (logoType) {
-			return A2(_lucamug$elm_logo$LogoElm$logo, logoType, size);
+			return A2(_lucamug$elm_logo$LogoCocacola$logo, logoType, size);
 		},
-		_lucamug$elm_logo$LogoElmIntrospection$logoTypes);
+		_lucamug$elm_logo$LogoCocacolaIntrospection$logoTypes);
 };
 var _lucamug$elm_logo$Main$luminance = function (color) {
 	var _p1 = _elm_lang$core$Color$toRgb(color);
@@ -9299,19 +9219,7 @@ var _lucamug$elm_logo$Main$logoSizes = {
 				_1: {
 					ctor: '::',
 					_0: 80,
-					_1: {
-						ctor: '::',
-						_0: 96,
-						_1: {
-							ctor: '::',
-							_0: 112,
-							_1: {
-								ctor: '::',
-								_0: 128,
-								_1: {ctor: '[]'}
-							}
-						}
-					}
+					_1: {ctor: '[]'}
 				}
 			}
 		}
@@ -9363,7 +9271,7 @@ var _lucamug$elm_logo$Main$update = F2(
 	});
 var _lucamug$elm_logo$Main$init = {
 	ctor: '_Tuple2',
-	_0: {logoType: _lucamug$elm_logo$LogoElmIntrospection$logoTypeDefault, logoSize: 64, backgroundColor: _elm_lang$core$Color$white},
+	_0: {logoType: _lucamug$elm_logo$LogoCocacolaIntrospection$logoTypeDefault, logoSize: 64, backgroundColor: _elm_lang$core$Color$white},
 	_1: _elm_lang$core$Platform_Cmd$none
 };
 var _lucamug$elm_logo$Main$Model = F3(
@@ -9459,7 +9367,7 @@ var _lucamug$elm_logo$Main$view = function (model) {
 								},
 								{
 									ctor: '::',
-									_0: A2(_lucamug$elm_logo$LogoElm$logo, model.logoType, model.logoSize),
+									_0: A2(_lucamug$elm_logo$LogoCocacola$logo, model.logoType, model.logoSize),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
@@ -9470,7 +9378,7 @@ var _lucamug$elm_logo$Main$view = function (model) {
 										'logo ',
 										A2(
 											_elm_lang$core$Basics_ops['++'],
-											_lucamug$elm_logo$LogoElmIntrospection$convertLogoTypeToString(model.logoType),
+											_lucamug$elm_logo$LogoCocacolaIntrospection$convertLogoTypeToString(model.logoType),
 											A2(
 												_elm_lang$core$Basics_ops['++'],
 												' ',
@@ -9532,11 +9440,11 @@ var _lucamug$elm_logo$Main$view = function (model) {
 													},
 													{
 														ctor: '::',
-														_0: A2(_lucamug$elm_logo$LogoElm$logo, logoType, 32),
+														_0: A2(_lucamug$elm_logo$LogoCocacola$logo, logoType, 32),
 														_1: {ctor: '[]'}
 													});
 											},
-											_lucamug$elm_logo$LogoElmIntrospection$logoTypes)),
+											_lucamug$elm_logo$LogoCocacolaIntrospection$logoTypes)),
 									_1: {ctor: '[]'}
 								}
 							}),
@@ -9567,10 +9475,10 @@ var _lucamug$elm_logo$Main$view = function (model) {
 											A2(
 												_elm_lang$core$List$map,
 												function (logoSize) {
-													var size = A2(
-														_elm_lang$core$Basics_ops['++'],
-														_elm_lang$core$Basics$toString(logoSize),
-														'px');
+													var width = _elm_lang$core$Basics$toString(
+														_elm_lang$core$Basics$floor(
+															_elm_lang$core$Basics$toFloat(logoSize) * _lucamug$elm_logo$LogoCocacola$ratio));
+													var height = _elm_lang$core$Basics$toString(logoSize);
 													return A2(
 														_elm_lang$html$Html$div,
 														{
@@ -9584,10 +9492,18 @@ var _lucamug$elm_logo$Main$view = function (model) {
 																		_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
 																		_1: {
 																			ctor: '::',
-																			_0: {ctor: '_Tuple2', _0: 'width', _1: size},
+																			_0: {
+																				ctor: '_Tuple2',
+																				_0: 'height',
+																				_1: A2(_elm_lang$core$Basics_ops['++'], height, 'px')
+																			},
 																			_1: {
 																				ctor: '::',
-																				_0: {ctor: '_Tuple2', _0: 'height', _1: size},
+																				_0: {
+																					ctor: '_Tuple2',
+																					_0: 'width',
+																					_1: A2(_elm_lang$core$Basics_ops['++'], width, 'px')
+																				},
 																				_1: {
 																					ctor: '::',
 																					_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid #ddd'},
@@ -9611,7 +9527,10 @@ var _lucamug$elm_logo$Main$view = function (model) {
 														{
 															ctor: '::',
 															_0: _elm_lang$html$Html$text(
-																_elm_lang$core$Basics$toString(logoSize)),
+																A2(
+																	_elm_lang$core$Basics_ops['++'],
+																	width,
+																	A2(_elm_lang$core$Basics_ops['++'], ' x ', height))),
 															_1: {ctor: '[]'}
 														});
 												},

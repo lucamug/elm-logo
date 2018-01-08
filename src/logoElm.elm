@@ -26,6 +26,11 @@ type Color
     | Black
 
 
+ratio : Float
+ratio =
+    1
+
+
 cssRgb : Color -> String
 cssRgb color =
     case color of

@@ -1,6 +1,7 @@
 # elm-logo
 
-## [Demo](https://lucamug.github.io/elm-logo/)
+## [Demo Elm](https://lucamug.github.io/elm-logo/)
+## [Demo Coca Cola](https://lucamug.github.io/elm-logo/indexCocacola.html)
 
 # Getting started
 
