@@ -8,8 +8,8 @@ import LogoCocacola as Logo
 import LogoCocacolaIntrospection as LogoIntrospection
 
 
--- import LogoElm as Logo
--- import LogoElmIntrospection as LogoIntrospection
+--import LogoElm as Logo
+--import LogoElmIntrospection as LogoIntrospection
 
 
 type alias Model =
@@ -95,11 +95,11 @@ view model =
             ]
         , div [ class "widthSideMargins" ]
             [ h2 [] [ text "Type" ]
-            , div []
+            , div [ class "selections" ]
                 (List.map
                     (\logoType ->
                         div
-                            [ class "clickable"
+                            [ class "clickable selectionItem"
                             , style
                                 [ ( "display", "inline-block" )
                                 , ( "height", "32px" )
@@ -115,7 +115,7 @@ view model =
             ]
         , div [ class "widthSideMargins" ]
             [ h2 [] [ text "Size" ]
-            , div []
+            , div [ class "selections" ]
                 (List.map
                     (\logoSize ->
                         let
@@ -126,18 +126,20 @@ view model =
                                 toString <| floor <| toFloat logoSize * Logo.ratio
                         in
                         div
-                            [ class "clickable"
-                            , style
-                                [ ( "display", "inline-block" )
-                                , ( "height", height ++ "px" )
-                                , ( "width", width ++ "px" )
-                                , ( "border", "1px solid #ddd" )
-                                , ( "text-align", "center" )
+                            [ class "clickable selectionItem" ]
+                            [ div
+                                [ style
+                                    [ ( "display", "inline-block" )
+                                    , ( "height", height ++ "px" )
+                                    , ( "width", width ++ "px" )
+                                    , ( "text-align", "center" )
+                                    , ( "background-color", "#ddd" )
+                                    ]
+                                , onClick (SelectLogoSize logoSize)
                                 ]
-                            , onClick (SelectLogoSize logoSize)
-                            ]
-                            [ --text <| convertLogoTypeToString logoType
-                              text <| width ++ " x " ++ height
+                                [ --text <| convertLogoTypeToString logoType
+                                  text <| width ++ " x " ++ height
+                                ]
                             ]
                     )
                     logoSizes
@@ -151,11 +153,11 @@ view model =
             ]
         , div [ class "widthSideMargins" ]
             [ h2 [] [ text "Background" ]
-            , div []
+            , div [ class "selections" ]
                 (List.map
                     (\( backgroundColor, colorName ) ->
                         div
-                            [ class "clickable"
+                            [ class "clickable selectionItem"
                             , style
                                 [ ( "display", "inline-block" )
                                 , ( "background-color", colorToCssRgb backgroundColor )
@@ -369,6 +371,15 @@ h2 {
 input {
     font-size: 20px;
     padding: 6px;
+}
+.selections {
+    display: flex;
+}
+.selectionItem {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
 }
 """
 

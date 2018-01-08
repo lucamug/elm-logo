@@ -28,6 +28,7 @@ type Color
 
 ratio : Float
 ratio =
+    -- Width / Height
     1
 
 
@@ -54,7 +55,7 @@ cssRgb color =
 
 
 logo : Type -> Size -> Html.Html msg
-logo type_ size =
+logo type_ height =
     let
         f =
             Svg.Attributes.fill
@@ -84,8 +85,8 @@ logo type_ size =
     Svg.svg
         [ Svg.Attributes.version "1"
         , Svg.Attributes.viewBox "0 0 323 323"
-        , Svg.Attributes.width <| toString size
-        , Svg.Attributes.height <| toString size
+        , Svg.Attributes.height <| toString height
+        , Svg.Attributes.width <| toString <| floor <| toFloat height * ratio
         ]
         [ p [ f c.c1, d "M162 153l70-70H92zm94 94l67 67V179z" ] []
         , p [ f c.c2, d "M9 0l70 70h153L162 0zm238 85l77 76-77 77-76-77z" ] []

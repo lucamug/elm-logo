@@ -8796,7 +8796,7 @@ var _lucamug$elm_logo$LogoElm$LightBlue = {ctor: 'LightBlue'};
 var _lucamug$elm_logo$LogoElm$Green = {ctor: 'Green'};
 var _lucamug$elm_logo$LogoElm$Orange = {ctor: 'Orange'};
 var _lucamug$elm_logo$LogoElm$logo = F2(
-	function (type_, size) {
+	function (type_, height) {
 		var c = function () {
 			var _p1 = type_;
 			if (_p1.ctor === 'Colorful') {
@@ -8829,12 +8829,14 @@ var _lucamug$elm_logo$LogoElm$logo = F2(
 					_0: _elm_lang$svg$Svg_Attributes$viewBox('0 0 323 323'),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$svg$Svg_Attributes$width(
-							_elm_lang$core$Basics$toString(size)),
+						_0: _elm_lang$svg$Svg_Attributes$height(
+							_elm_lang$core$Basics$toString(height)),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$svg$Svg_Attributes$height(
-								_elm_lang$core$Basics$toString(size)),
+							_0: _elm_lang$svg$Svg_Attributes$width(
+								_elm_lang$core$Basics$toString(
+									_elm_lang$core$Basics$floor(
+										_elm_lang$core$Basics$toFloat(height) * _lucamug$elm_logo$LogoElm$ratio))),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -9009,7 +9011,7 @@ var _lucamug$elm_logo$Main$lucamug = A2(
 			}
 		}
 	});
-var _lucamug$elm_logo$Main$css = '\n@import url(\'https://fonts.googleapis.com/css?family=Source+Sans+Pro\');\nbody {\n    background-color: #fff;\n    font-family: \'Source Sans Pro\', sans-serif;\n    color: #bbb;\n    padding: 0;\n    margin: 0;\n}\n.important {\n    color: black;\n}\n.widthSideMargins, .lucamug {\n    padding-left: 60px;\n    padding-right: 60px;\n}\nh1, h2 {\n    font-weight: normal;\n    margin: 0;\n}\n.lucamug {\n    padding-top: 30px;\n    padding-bottom: 60px;\n}\na {\n    color: #bbb;\n}\nh1 {\n    padding-top: 80px;\n    font-size: 60px;\n}\nh2 {\n    padding-top: 40px;\n    padding-bottom: 20px;\n}\n.logoContainer {\n    padding-bottom: 40px;\n}\n.svgsContainer {\n    padding: 0 30px 0 30px;\n}\n.svgContainer {\n    padding: 30px;\n    display: inline-block;\n}\n.elmLogoContainer {\n    text-align: right;\n    display: inline-block;\n    position: absolute;\n    right: 0px;\n}\n.elmLogo {\n    padding: 20px;\n}\n.clickable {\n    cursor: pointer;\n}\ninput {\n    font-size: 20px;\n    padding: 6px;\n}\n';
+var _lucamug$elm_logo$Main$css = '\n@import url(\'https://fonts.googleapis.com/css?family=Source+Sans+Pro\');\nbody {\n    background-color: #fff;\n    font-family: \'Source Sans Pro\', sans-serif;\n    color: #bbb;\n    padding: 0;\n    margin: 0;\n}\n.important {\n    color: black;\n}\n.widthSideMargins, .lucamug {\n    padding-left: 60px;\n    padding-right: 60px;\n}\nh1, h2 {\n    font-weight: normal;\n    margin: 0;\n}\n.lucamug {\n    padding-top: 30px;\n    padding-bottom: 60px;\n}\na {\n    color: #bbb;\n}\nh1 {\n    padding-top: 80px;\n    font-size: 60px;\n}\nh2 {\n    padding-top: 40px;\n    padding-bottom: 20px;\n}\n.logoContainer {\n    padding-bottom: 40px;\n}\n.svgsContainer {\n    padding: 0 30px 0 30px;\n}\n.svgContainer {\n    padding: 30px;\n    display: inline-block;\n}\n.elmLogoContainer {\n    text-align: right;\n    display: inline-block;\n    position: absolute;\n    right: 0px;\n}\n.elmLogo {\n    padding: 20px;\n}\n.clickable {\n    cursor: pointer;\n}\ninput {\n    font-size: 20px;\n    padding: 6px;\n}\n.selections {\n    display: flex;\n}\n.selectionItem {\n    border: 1px solid #ddd;\n    border-radius: 5px;\n    margin: 5px;\n    padding: 5px;\n}\n';
 var _lucamug$elm_logo$Main$colorToCssRgb = function (color) {
 	var _p0 = _elm_lang$core$Color$toRgb(color);
 	var red = _p0.red;
@@ -9490,7 +9492,11 @@ var _lucamug$elm_logo$Main$view = function (model) {
 									ctor: '::',
 									_0: A2(
 										_elm_lang$html$Html$div,
-										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('selections'),
+											_1: {ctor: '[]'}
+										},
 										A2(
 											_elm_lang$core$List$map,
 											function (logoType) {
@@ -9498,7 +9504,7 @@ var _lucamug$elm_logo$Main$view = function (model) {
 													_elm_lang$html$Html$div,
 													{
 														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('clickable'),
+														_0: _elm_lang$html$Html_Attributes$class('clickable selectionItem'),
 														_1: {
 															ctor: '::',
 															_0: _elm_lang$html$Html_Attributes$style(
@@ -9552,7 +9558,11 @@ var _lucamug$elm_logo$Main$view = function (model) {
 										ctor: '::',
 										_0: A2(
 											_elm_lang$html$Html$div,
-											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('selections'),
+												_1: {ctor: '[]'}
+											},
 											A2(
 												_elm_lang$core$List$map,
 												function (logoSize) {
@@ -9564,54 +9574,61 @@ var _lucamug$elm_logo$Main$view = function (model) {
 														_elm_lang$html$Html$div,
 														{
 															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$class('clickable'),
-															_1: {
-																ctor: '::',
-																_0: _elm_lang$html$Html_Attributes$style(
-																	{
-																		ctor: '::',
-																		_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
-																		_1: {
+															_0: _elm_lang$html$Html_Attributes$class('clickable selectionItem'),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$div,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$style(
+																		{
 																			ctor: '::',
-																			_0: {
-																				ctor: '_Tuple2',
-																				_0: 'height',
-																				_1: A2(_elm_lang$core$Basics_ops['++'], height, 'px')
-																			},
+																			_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
 																			_1: {
 																				ctor: '::',
 																				_0: {
 																					ctor: '_Tuple2',
-																					_0: 'width',
-																					_1: A2(_elm_lang$core$Basics_ops['++'], width, 'px')
+																					_0: 'height',
+																					_1: A2(_elm_lang$core$Basics_ops['++'], height, 'px')
 																				},
 																				_1: {
 																					ctor: '::',
-																					_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid #ddd'},
+																					_0: {
+																						ctor: '_Tuple2',
+																						_0: 'width',
+																						_1: A2(_elm_lang$core$Basics_ops['++'], width, 'px')
+																					},
 																					_1: {
 																						ctor: '::',
 																						_0: {ctor: '_Tuple2', _0: 'text-align', _1: 'center'},
-																						_1: {ctor: '[]'}
+																						_1: {
+																							ctor: '::',
+																							_0: {ctor: '_Tuple2', _0: 'background-color', _1: '#ddd'},
+																							_1: {ctor: '[]'}
+																						}
 																					}
 																				}
 																			}
-																		}
-																	}),
-																_1: {
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Events$onClick(
+																			_lucamug$elm_logo$Main$SelectLogoSize(logoSize)),
+																		_1: {ctor: '[]'}
+																	}
+																},
+																{
 																	ctor: '::',
-																	_0: _elm_lang$html$Html_Events$onClick(
-																		_lucamug$elm_logo$Main$SelectLogoSize(logoSize)),
+																	_0: _elm_lang$html$Html$text(
+																		A2(
+																			_elm_lang$core$Basics_ops['++'],
+																			width,
+																			A2(_elm_lang$core$Basics_ops['++'], ' x ', height))),
 																	_1: {ctor: '[]'}
-																}
-															}
-														},
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html$text(
-																A2(
-																	_elm_lang$core$Basics_ops['++'],
-																	width,
-																	A2(_elm_lang$core$Basics_ops['++'], ' x ', height))),
+																}),
 															_1: {ctor: '[]'}
 														});
 												},
@@ -9662,7 +9679,11 @@ var _lucamug$elm_logo$Main$view = function (model) {
 											ctor: '::',
 											_0: A2(
 												_elm_lang$html$Html$div,
-												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('selections'),
+													_1: {ctor: '[]'}
+												},
 												A2(
 													_elm_lang$core$List$map,
 													function (_p7) {
@@ -9672,7 +9693,7 @@ var _lucamug$elm_logo$Main$view = function (model) {
 															_elm_lang$html$Html$div,
 															{
 																ctor: '::',
-																_0: _elm_lang$html$Html_Attributes$class('clickable'),
+																_0: _elm_lang$html$Html_Attributes$class('clickable selectionItem'),
 																_1: {
 																	ctor: '::',
 																	_0: _elm_lang$html$Html_Attributes$style(
