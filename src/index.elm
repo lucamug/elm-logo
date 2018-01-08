@@ -1,45 +1,177 @@
 module Main exposing (..)
 
+--import LogoCocacola as Logo
+--import LogoCocacolaIntrospection as LogoIntrospection
+
 import Color
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Logo
+import Html.Events exposing (..)
+import LogoElm as Logo
+import LogoElmIntrospection as LogoIntrospection
 
 
--- http://tango.freedesktop.org/Tango_Icon_Theme_Guidelines
+type alias Model =
+    { logoType : Logo.Type
+    , logoSize : Logo.Size
+    , backgroundColor : Color.Color
+    }
 
 
-main : Html.Html msg
+init : ( Model, Cmd msg )
+init =
+    ( { logoType = LogoIntrospection.logoTypeDefault
+      , logoSize = 64
+      , backgroundColor = Color.white
+      }
+    , Cmd.none
+    )
+
+
+type Msg
+    = SelectLogoType Logo.Type
+    | SelectLogoSize Logo.Size
+    | SelectLogoSizeFromInput String
+    | SelectBackgroundColor Color.Color
+
+
+update : Msg -> Model -> ( Model, Cmd Msg )
+update msg model =
+    case Debug.log "msg" msg of
+        SelectLogoType logoType ->
+            ( { model | logoType = logoType }, Cmd.none )
+
+        SelectLogoSize logoSize ->
+            ( { model | logoSize = logoSize }, Cmd.none )
+
+        SelectLogoSizeFromInput logoSizeString ->
+            let
+                size =
+                    String.toInt logoSizeString
+            in
+            case size of
+                Ok sizeInt ->
+                    ( { model | logoSize = sizeInt }, Cmd.none )
+
+                Err _ ->
+                    ( model, Cmd.none )
+
+        SelectBackgroundColor backgroundColor ->
+            ( { model | backgroundColor = backgroundColor }, Cmd.none )
+
+
+
+-- MAIN
+
+
+main : Program Never Model Msg
 main =
+    program
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = \_ -> Sub.none
+        }
+
+
+view : Model -> Html Msg
+view model =
     div
         []
         [ node "style" [] [ text css ]
-        , h1 []
+        , h1 [ class "widthSideMargins" ]
             [ text "elm "
             , span [ class "important" ] [ text "logo" ]
             ]
-        , logoTest Color.white "white"
-        , logoTest Color.lightGray "light gray"
-        , logoTest Color.gray "gray"
-        , logoTest Color.darkGray "dark gray"
-        , logoTest Color.lightCharcoal "light charcoal"
-        , logoTest Color.charcoal "charcoal"
-        , logoTest Color.darkCharcoal "dark charcoal"
-        , logoTest Color.black "black"
-        , logoTest Color.lightYellow "light yellow"
-        , logoTest Color.lightOrange "light orange"
-        , logoTest Color.lightGreen "light green"
-        , logoTest Color.lightRed "light red"
-        , logoTest Color.lightBlue "light blue"
-        , logoTest Color.lightPurple "light purple"
-        , logoTest Color.lightBrown "light brown"
-        , logoTest Color.darkYellow "dark yellow"
-        , logoTest Color.darkOrange "dark orange"
-        , logoTest Color.darkGreen "dark green"
-        , logoTest Color.darkRed "dark red"
-        , logoTest Color.darkBlue "dark blue"
-        , logoTest Color.darkPurple "dark purple"
-        , logoTest Color.darkBrown "dark brown"
+        , div [ class "elmLogoContainer widthSideMargins" ]
+            [ div
+                [ class "elmLogo"
+                , style [ ( "backgroundColor", colorToCssRgb model.backgroundColor ) ]
+                ]
+                [ Logo.logo model.logoType model.logoSize
+                ]
+            , text <| "logo " ++ LogoIntrospection.convertLogoTypeToString model.logoType ++ " " ++ toString model.logoSize
+            ]
+        , div [ class "widthSideMargins" ]
+            [ h2 [] [ text "Type" ]
+            , div []
+                (List.map
+                    (\logoType ->
+                        div
+                            [ class "clickable"
+                            , style
+                                [ ( "display", "inline-block" )
+                                , ( "height", "32px" )
+                                ]
+                            , onClick (SelectLogoType logoType)
+                            ]
+                            [ --text <| convertLogoTypeToString logoType
+                              Logo.logo logoType 32
+                            ]
+                    )
+                    LogoIntrospection.logoTypes
+                )
+            ]
+        , div [ class "widthSideMargins" ]
+            [ h2 [] [ text "Size" ]
+            , div []
+                (List.map
+                    (\logoSize ->
+                        let
+                            size =
+                                toString logoSize ++ "px"
+                        in
+                        div
+                            [ class "clickable"
+                            , style
+                                [ ( "display", "inline-block" )
+                                , ( "width", size )
+                                , ( "height", size )
+                                , ( "border", "1px solid #ddd" )
+                                , ( "text-align", "center" )
+                                ]
+                            , onClick (SelectLogoSize logoSize)
+                            ]
+                            [ --text <| convertLogoTypeToString logoType
+                              text <| toString logoSize
+                            ]
+                    )
+                    logoSizes
+                )
+            , input
+                [ type_ "number"
+                , value <| toString model.logoSize
+                , onInput SelectLogoSizeFromInput
+                ]
+                []
+            ]
+        , div [ class "widthSideMargins" ]
+            [ h2 [] [ text "Background" ]
+            , div []
+                (List.map
+                    (\( backgroundColor, colorName ) ->
+                        div
+                            [ class "clickable"
+                            , style
+                                [ ( "display", "inline-block" )
+                                , ( "background-color", colorToCssRgb backgroundColor )
+                                , ( "width", "16px" )
+                                , ( "height", "16px" )
+                                ]
+                            , onClick (SelectBackgroundColor backgroundColor)
+                            ]
+                            []
+                    )
+                    colors
+                )
+            , input
+                [ type_ "text"
+                , value <| colorToCssRgb model.backgroundColor
+                ]
+                []
+            ]
+        , h2 [ class "widthSideMargins" ] [ text "Combinations" ]
+        , logoCombinations
         , a [ href "https://github.com/lucamug/elm-logo" ]
             [ img
                 [ style [ ( "position", "absolute" ), ( "top", "0" ), ( "right", "0" ), ( "border", "0" ) ]
@@ -50,6 +182,56 @@ main =
             ]
         , lucamug
         ]
+
+
+logoSizes : List Logo.Size
+logoSizes =
+    [ 16
+    , 32
+    , 48
+    , 64
+    , 80
+    , 96
+    , 112
+    , 128
+    ]
+
+
+colors : List ( Color.Color, String )
+colors =
+    [ ( Color.white, "white" )
+    , ( Color.lightGray, "light gray" )
+    , ( Color.gray, "gray" )
+    , ( Color.darkGray, "dark gray" )
+    , ( Color.lightCharcoal, "light charcoal" )
+    , ( Color.charcoal, "charcoal" )
+    , ( Color.darkCharcoal, "dark charcoal" )
+    , ( Color.black, "black" )
+    , ( Color.lightYellow, "light yellow" )
+    , ( Color.lightOrange, "light orange" )
+    , ( Color.lightGreen, "light green" )
+    , ( Color.lightRed, "light red" )
+    , ( Color.lightBlue, "light blue" )
+    , ( Color.lightPurple, "light purple" )
+    , ( Color.lightBrown, "light brown" )
+    , ( Color.darkYellow, "dark yellow" )
+    , ( Color.darkOrange, "dark orange" )
+    , ( Color.darkGreen, "dark green" )
+    , ( Color.darkRed, "dark red" )
+    , ( Color.darkBlue, "dark blue" )
+    , ( Color.darkPurple, "dark purple" )
+    , ( Color.darkBrown, "dark brown" )
+    ]
+
+
+logoCombinations : Html msg
+logoCombinations =
+    div
+        []
+        (List.map
+            (\( color, colorText ) -> logoTest color colorText)
+            colors
+        )
 
 
 logoTest : Color.Color -> String -> Html msg
@@ -64,34 +246,32 @@ logoTest color name =
             else
                 ( "#333", "#777" )
     in
-    div []
-        [ div
-            [ class "logoContainer"
-            , style
-                [ ( "background-color", cssRgb ) ]
-            ]
-            [ h2
-                [ style [ ( "color", textColor ) ] ]
-                [ text <| "on " ++ name
-                , span
-                    [ style
-                        [ ( "color", secondaryColor )
-                        , ( "font-size", "16px" )
-                        , ( "display", "inline-block" )
-                        , ( "padding-left", "40px" )
-                        ]
-                    ]
-                    [ text <| " " ++ cssRgb
-                    , text " luminance "
-                    , text <| toString <| floor <| luminance color
+    div
+        [ class "logoContainer"
+        , style
+            [ ( "background-color", cssRgb ) ]
+        ]
+        [ h2
+            [ class "widthSideMargins", style [ ( "color", textColor ) ] ]
+            [ text <| "on " ++ name
+            , span
+                [ style
+                    [ ( "color", secondaryColor )
+                    , ( "font-size", "16px" )
+                    , ( "display", "inline-block" )
+                    , ( "padding-left", "40px" )
                     ]
                 ]
-            , div [ class "svgsContainer" ]
-                (List.map
-                    (\item -> div [ class "svgContainer" ] [ item ])
-                    (logoSeries "100")
-                )
+                [ text <| " " ++ cssRgb
+                , text " luminance "
+                , text <| toString <| floor <| luminance color
+                ]
             ]
+        , div [ class "svgsContainer" ]
+            (List.map
+                (\item -> div [ class "svgContainer" ] [ item ])
+                (logoSeries 60)
+            )
         ]
 
 
@@ -104,16 +284,9 @@ luminance color =
     0.299 * toFloat red + 0.587 * toFloat green + 0.114 * toFloat blue
 
 
-logoSeries : String -> List (Html msg)
+logoSeries : Logo.Size -> List (Html msg)
 logoSeries size =
-    [ Logo.elm Logo.Colored size
-    , Logo.elm (Logo.Monochrome Logo.Orange) size
-    , Logo.elm (Logo.Monochrome Logo.Green) size
-    , Logo.elm (Logo.Monochrome Logo.LightBlue) size
-    , Logo.elm (Logo.Monochrome Logo.Blue) size
-    , Logo.elm (Logo.Monochrome Logo.White) size
-    , Logo.elm (Logo.Monochrome Logo.Black) size
-    ]
+    List.map (\logoType -> Logo.logo logoType size) LogoIntrospection.logoTypes
 
 
 colorToCssRgb : Color.Color -> String
@@ -138,7 +311,7 @@ css =
     """
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 body {
-    background-color: white;
+    background-color: #fff;
     font-family: 'Source Sans Pro', sans-serif;
     color: #bbb;
     padding: 0;
@@ -147,13 +320,17 @@ body {
 .important {
     color: black;
 }
+.widthSideMargins, .lucamug {
+    padding-left: 60px;
+    padding-right: 60px;
+}
 h1, h2 {
     font-weight: normal;
-    padding-left: 60px;
     margin: 0;
 }
 .lucamug {
-    padding: 60px;
+    padding-top: 30px;
+    padding-bottom: 60px;
 }
 a {
     color: #bbb;
@@ -163,7 +340,7 @@ h1 {
     font-size: 60px;
 }
 h2 {
-    padding-top: 80px;
+    padding-top: 40px;
     padding-bottom: 20px;
 }
 .logoContainer {
@@ -176,6 +353,22 @@ h2 {
     padding: 30px;
     display: inline-block;
 }
+.elmLogoContainer {
+    text-align: right;
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+}
+.elmLogo {
+    padding: 20px;
+}
+.clickable {
+    cursor: pointer;
+}
+input {
+    font-size: 20px;
+    padding: 6px;
+}
 """
 
 
@@ -186,7 +379,11 @@ h2 {
 lucamug : Html msg
 lucamug =
     a [ class "lucamug", href "https://github.com/lucamug" ]
-        [ node "style" [] [ text """.lucamug{opacity:.4;color:#000;display:block;text-decoration:none}.lucamug:hover{opacity:.5}.lucamug:hover .lucamugSpin{transform:rotate(360deg)}.lucamugSpin{color:#3d8a9f ;display:inline-block;transition:transform .6s ease-in-out}""" ]
+        [ node "style" [] [ text """
+        .lucamug{opacity:.4;color:#000;display:block;text-decoration:none}
+        .lucamug:hover{opacity:.5}
+        .lucamug:hover .lucamugSpin{transform:rotate(0deg);padding:0;position:relative;top:0;}
+        .lucamugSpin{color:red ;display:inline-block;transition:all .4s ease-in-out; transform:rotate(60deg);padding:0 2px 0 4px;position:relative;top:-4px;}""" ]
         , text "made with "
         , span [ class "lucamugSpin" ] [ text "凸" ]
         , text " by lucamug"

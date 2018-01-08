@@ -1,16 +1,20 @@
-module Logo exposing (..)
+module LogoElm exposing (..)
 
 import Html
 import Svg
 import Svg.Attributes
 
 
--- Original from https://github.com/elm-lang/svg/blob/master/examples/Logo.elm
+-- Original SVG: https://github.com/elm-lang/svg/blob/master/examples/Logo.elm
 
 
 type Type
-    = Monochrome Color
-    | Colored
+    = Color Color
+    | Colorful
+
+
+type alias Size =
+    Int
 
 
 type Color
@@ -38,14 +42,14 @@ cssRgb color =
             "#5a6378"
 
         White ->
-            "#fafafa"
+            "#fff"
 
         Black ->
-            "#151515"
+            "#000"
 
 
-elm : Type -> String -> Html.Html msg
-elm logoColor size =
+logo : Type -> Size -> Html.Html msg
+logo type_ size =
     let
         f =
             Svg.Attributes.fill
@@ -57,15 +61,15 @@ elm logoColor size =
             Svg.path
 
         c =
-            case logoColor of
-                Colored ->
+            case type_ of
+                Colorful ->
                     { c1 = cssRgb Orange
                     , c2 = cssRgb Green
                     , c3 = cssRgb LightBlue
                     , c4 = cssRgb Blue
                     }
 
-                Monochrome c ->
+                Color c ->
                     { c1 = cssRgb c
                     , c2 = cssRgb c
                     , c3 = cssRgb c
@@ -75,8 +79,8 @@ elm logoColor size =
     Svg.svg
         [ Svg.Attributes.version "1"
         , Svg.Attributes.viewBox "0 0 323 323"
-        , Svg.Attributes.width size
-        , Svg.Attributes.height size
+        , Svg.Attributes.width <| toString size
+        , Svg.Attributes.height <| toString size
         ]
         [ p [ f c.c1, d "M162 153l70-70H92zm94 94l67 67V179z" ] []
         , p [ f c.c2, d "M9 0l70 70h153L162 0zm238 85l77 76-77 77-76-77z" ] []
